@@ -1,0 +1,14 @@
+[project]
+name = "geo-command-center-browser-runner"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  "typer>=0.12.0",
+]
+
+[project.scripts]
+geo-browser-runner = "browser_runner.main:app"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"

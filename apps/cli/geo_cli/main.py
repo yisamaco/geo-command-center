@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import shutil
 
 import typer
 from rich import print
@@ -96,6 +97,17 @@ def knowledge_export(slug: str, export_type: str = "markdown") -> None:
             {"entity_id": entity["id"], "export_type": export_type, "content": content},
         )
     print(f"[green]Exported entity[/green] {slug} as {export_type}")
+
+
+@app.command("report")
+def generate_report(report_name: str = "geo-report") -> None:
+    """Generate report markdown from template."""
+    template = ROOT / "reports" / "templates" / "geo_report_template.md"
+    output_dir = ROOT / "reports"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output = output_dir / f"{report_name}.md"
+    shutil.copyfile(template, output)
+    print(f"[green]Generated report template:[/green] {output}")
 
 
 if __name__ == "__main__":
